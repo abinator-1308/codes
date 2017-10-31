@@ -1,6 +1,29 @@
 #include <bits/stdc++.h>
 using namespace std;
- 
+ // matrix chain multiplication
+
+// array - a[1],a[2] ....... a[n+1]
+// ith matrix -> dimensions -> a[i]*a[i+1]
+
+
+int func(int i,int j)
+{
+	if(i==j)
+		return 0;
+	int &ans=dp[i][j];
+	if(ans!=-1)
+		return ans;
+	for(int k=i;k<j;k++)
+	{
+		int cost=a[i]*a[k+1]*a[j+1];
+		ans=min(ans,func(i,k)+func(k+1,j)+cost);
+	}
+	return ans;
+}
+
+
+
+
 int main() {
 	int s,n,h,count,flag,i,k;
 	long long int a[100001],b[100001];
